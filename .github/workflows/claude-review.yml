@@ -1,0 +1,45 @@
+name: Claude PR Review
+
+# Automatic review on every PR. Complements (never replaces) owner review.
+# Note: `pull_request` (not pull_request_target) so fork PRs cannot access secrets.
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  review:
+    # Skip review of Claude's own bot commits if any, and skip drafts
+    if: github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: read
+      id-token: write
+    steps:
+      - uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          # Or for Claude Pro/Max subscribers instead of an API key:
+          # claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: |
+            Review this pull request for the BreakRoom project. Read CLAUDE.md, STACK.md,
+            and PLAN.md first for project rules and the current stage's scope.
+
+            Review priorities, in order:
+            1. SECURITY: This is a public app. Every table must have RLS. No client-trusted
+               role checks, rating math, match confirmation, or bracket advancement. No secrets
+               or service-role usage in client code.
+            2. CORRECTNESS: bracket logic (byes, double-elim routing, grand-final reset),
+               Glicko-2 (only confirmed matches, per-game-type isolation), state machines.
+            3. SCOPE: the PR stays within its stage per PLAN.md — flag anything building ahead.
+            4. CONVENTIONS: CLAUDE.md rules (TS strict, migrations-only schema changes,
+               theme tokens, server components by default).
+            5. TESTS: new logic is tested; RLS changes have policy tests.
+
+            Post concise inline comments on specific lines for real issues. End with a summary:
+            blockers, warnings, and an overall verdict. Do not nitpick style that linters cover.
+            If the PR is clean, say so briefly — do not invent findings.
+          claude_args: |
+            --max-turns 12
