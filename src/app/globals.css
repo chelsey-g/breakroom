@@ -1,0 +1,142 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: ui-monospace, monospace;
+  --font-heading: var(--font-display);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/*
+ * Retro vintage-billiards-poster theme (VISION.md / STACK.md).
+ * Felt green + cream + brass/wood + chalk-blue. Single cohesive identity —
+ * .dark is a dim-room variant of the same poster, not a separate palette.
+ * Change tokens here only; feature code must never hardcode colors.
+ */
+:root {
+  --background: #f4ecd8;
+  --foreground: #2b2016;
+  --card: #faf5e9;
+  --card-foreground: #2b2016;
+  --popover: #faf5e9;
+  --popover-foreground: #2b2016;
+  --primary: #1e4d3b;
+  --primary-foreground: #f4ecd8;
+  --secondary: #6f4a2e;
+  --secondary-foreground: #f4ecd8;
+  --muted: #e7dcc0;
+  --muted-foreground: #6b5d45;
+  --accent: #b8892b;
+  --accent-foreground: #2b2016;
+  --destructive: #b3402a;
+  --border: #d8c9a3;
+  --input: #d8c9a3;
+  --ring: #5b8aa6;
+  --chart-1: #1e4d3b;
+  --chart-2: #b8892b;
+  --chart-3: #5b8aa6;
+  --chart-4: #6f4a2e;
+  --chart-5: #b3402a;
+  --radius: 0.375rem;
+  --sidebar: #eee2c4;
+  --sidebar-foreground: #2b2016;
+  --sidebar-primary: #1e4d3b;
+  --sidebar-primary-foreground: #f4ecd8;
+  --sidebar-accent: #b8892b;
+  --sidebar-accent-foreground: #2b2016;
+  --sidebar-border: #d8c9a3;
+  --sidebar-ring: #5b8aa6;
+}
+
+.dark {
+  --background: #12241c;
+  --foreground: #f0e6cc;
+  --card: #16301f;
+  --card-foreground: #f0e6cc;
+  --popover: #16301f;
+  --popover-foreground: #f0e6cc;
+  --primary: #d9a441;
+  --primary-foreground: #12241c;
+  --secondary: #3a5a45;
+  --secondary-foreground: #f0e6cc;
+  --muted: #1d3527;
+  --muted-foreground: #a8b8a8;
+  --accent: #d9a441;
+  --accent-foreground: #12241c;
+  --destructive: #d9603f;
+  --border: #2a4534;
+  --input: #2a4534;
+  --ring: #7fb3d5;
+  --chart-1: #d9a441;
+  --chart-2: #7fb3d5;
+  --chart-3: #a8783a;
+  --chart-4: #4a7a5c;
+  --chart-5: #d9603f;
+  --sidebar: #0e1e17;
+  --sidebar-foreground: #f0e6cc;
+  --sidebar-primary: #d9a441;
+  --sidebar-primary-foreground: #12241c;
+  --sidebar-accent: #3a5a45;
+  --sidebar-accent-foreground: #f0e6cc;
+  --sidebar-border: #2a4534;
+  --sidebar-ring: #7fb3d5;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-heading tracking-wide;
+  }
+}
